@@ -83,12 +83,14 @@ export default {
     const emailReg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
     const checkEmail = (rule, value, callback) => {
       if (!value) {
+        this.disabled = true;
         return callback(new Error('请输入邮箱'));
       }
       if (emailReg.test(value)) {
         this.disabled = false;
         return callback();
       }
+      this.disabled = true;
       return callback(new Error('邮箱格式不正确'));
     };
 

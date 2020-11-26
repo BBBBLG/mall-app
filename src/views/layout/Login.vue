@@ -74,11 +74,15 @@ export default {
         if (valid) {
           api
             .login(this.loginForm)
-            .then(() => {
+            .then((res) => {
+              this.$store.dispatch('setUserInfo', res);
               this.$message.success('登陆成功，即将跳转首页！');
-              this.$router.push({
-                name: 'Home',
-              });
+              // 三秒后自动跳转
+              setTimeout(() => {
+                this.$router.push({
+                  name: 'Home',
+                });
+              }, 1500);
             })
             .catch((error) => {
               this.$message.error(error);

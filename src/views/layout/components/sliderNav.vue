@@ -14,11 +14,12 @@
       </a-breadcrumb>
     </div>
     <ul class="user-info">
-      <li>
-        欢迎，鹏鹏
+      <li class="user-name">
+        欢迎，
+        {{ $store.state.user.username }}
         <a-icon type="down" />
       </li>
-      <li>退出登录</li>
+      <li class="login-out" @click="logOut">退出登录</li>
     </ul>
   </div>
 </template>
@@ -26,13 +27,15 @@
 <script>
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     toggleCollapsed() {
       this.$store.dispatch('changeCollapsed');
+    },
+    logOut() {
+      this.$store.dispatch('logOut');
+      this.$router.push('/login');
     },
   },
 };
