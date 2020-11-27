@@ -11,6 +11,7 @@ const asyncRouterMap = [
     path: '/product',
     name: 'Product',
     component: Home,
+    redirect: '/statistics',
     meta: {
       title: '商品',
       hidden: false,
