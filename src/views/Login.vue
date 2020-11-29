@@ -80,7 +80,7 @@ export default {
               // 三秒后自动跳转
               setTimeout(() => {
                 this.$router.push({
-                  name: 'Home',
+                  name: '/statistics',
                 });
               }, 1500);
             })

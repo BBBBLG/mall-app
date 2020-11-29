@@ -11,7 +11,6 @@ const asyncRouterMap = [
     path: '/product',
     name: 'Product',
     component: Home,
-    redirect: '/statistics',
     meta: {
       title: '商品',
       hidden: false,
@@ -39,6 +38,16 @@ const asyncRouterMap = [
         component: () => import('@/views/page/ProductAdd.vue'),
       },
       {
+        path: 'edit/:id',
+        name: 'ProductEdit',
+        meta: {
+          title: '编辑商品',
+          icon: 'edit',
+          hidden: true,
+        },
+        component: () => import('@/views/page/ProductAdd.vue'),
+      },
+      {
         path: 'category',
         name: 'Category',
         meta: {
@@ -58,6 +67,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/statistics',
     meta: {
       title: '首页',
       hidden: false,
@@ -109,7 +119,7 @@ router.beforeEach((to, from, next) => {
         const menuRoutes = getMenuRoutes(store.state.user.role, asyncRouterMap);
 
         store.dispatch('changeMenuRoutes', routes.concat(menuRoutes)).then(() => {
-          next();
+          next('/');
           router.addRoutes(menuRoutes);
         });
         isAddRoutes = true;
@@ -117,7 +127,8 @@ router.beforeEach((to, from, next) => {
       return next();
     }
     return next('/login');
-  } if (to.path === '/login') {
+  }
+  if (to.path === '/login') {
     if (store.state.user.appkey
       && store.state.user.username
       && store.state.user.email
